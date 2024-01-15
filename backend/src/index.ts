@@ -1,12 +1,9 @@
-import { Express } from "express";
-import express from "express";
+import app from "./app"
+import { connectDatabase } from "./db/connection";
 
-const app=express();
-
-app.use(express.json())
-
-app.get("/hello",(req,res,next) => {
-    return res.send("Hello from get");
+const PORT=process.env.POR || 5000;
+connectDatabase().then(() =>{
+    app.listen(PORT,() => console.log("Server Open")); 
 })
-
+ 
 app.listen(5000,()=> console.log("Server is live")); 
